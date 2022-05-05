@@ -1,0 +1,26 @@
+<%if tasks.any? %>
+  <ul class="list-unstyled mt-2">
+    <% tasks.each do |task| %>
+      <li class="d-flex">
+        <img class="rounded me-2 mb-5" src="<%= gravatar_url(task.user, { size: 64 }) %>" alt="">
+        <div>
+          <div>
+            <%= link_to task.user.name, user_path(task.user), class: "text-decoration-none" %> <span class="text-muted">posted at <%= task.created_at %></span>
+          </div>
+          <tr>
+            <td><%= link_to task.id, task %></td>
+            <td>タスク: <%= task.content %></td>
+            <td>ステータス:<%= task.status %></td>
+          </tr>
+          <div>
+
+            <%= link_to "Delete", task, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+            
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%== pagy_bootstrap_nav(@pagy) %>
+<% end %>
+  
